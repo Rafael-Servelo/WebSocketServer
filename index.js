@@ -14,7 +14,7 @@ const os = require("os");
 const clc = require("cli-color");
 
 const networkinfo = os.networkInterfaces();
-const ipv4 = networkinfo.en1[1].address;
+//const ipv4 = networkinfo.en1[1].address;
 
 app.use(express.static(path.join(__dirname, "public")));
 app.set("views", path.join(__dirname, "public"));
@@ -74,8 +74,15 @@ server.listen(3001, () => {
   console.log(
     "Starting connection to WebSocket Server in: \n\n" +
       "LocalHost:\n" +
-      clc.bold.green("→ http://127.0.0.1:3001  \n\n") +
-      "Host:\n" +
-      clc.bold.green("→ http://" + ipv4 + ":3001 \n")
-  );
+      clc.bold.green("→ http://127.0.0.1:3001  \n\n"));
 });
+
+// server.listen(3001, () => {
+//   console.log(
+//     "Starting connection to WebSocket Server in: \n\n" +
+//       "LocalHost:\n" +
+//       clc.bold.green("→ http://127.0.0.1:3001  \n\n") +
+//       "Host:\n" +
+//       clc.bold.green("→ http://" + ipv4 + ":3001 \n")
+//   );
+// });
