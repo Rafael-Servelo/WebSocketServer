@@ -1,0 +1,139 @@
+:root {
+  --color-1: #2d3250;
+  --color-2: #424769;
+  --color-3: #676f9d;
+  --color-4: #f9b17a;
+  --color-5: #f9b17a80;
+  --color-font-1: #f4f4f4;
+}
+
+body,
+* {
+  margin: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-family: "Lato", sans-serif;
+  letter-spacing: 0.2rem;
+}
+
+body {
+  color: var(--color-font-1);
+  background: var(--color-1);
+}
+
+input,
+#description {
+  width: 100%;
+  color: var(--color-font-1);
+  border: none;
+  background: var(--color-3);
+  font-weight: 300;
+  letter-spacing: 0.1rem;
+}
+
+textarea {
+  color: var(--color-font-1);
+  width: 100%;
+  background: none;
+  border: none;
+  height: max-content;
+}
+
+h1 {
+  margin: 1rem;
+  font-weight: 500;
+}
+.titleApp {
+  text-align: center;
+  margin: 1rem;
+}
+
+button {
+  margin-top: 1rem;
+  width: min-content;
+  background: var(--color-4);
+  border: none;
+  padding: 1rem 3rem;
+  border-radius: 5px;
+  transition: all 0.3s;
+  font-weight: 600;
+  letter-spacing: 0.08rem;
+  cursor: pointer;
+}
+button:active {
+  filter: brightness(0.8);
+}
+button:hover {
+  box-shadow: 0px 0px 20px var(--color-5);
+}
+
+textarea:focus,
+input:focus {
+  outline: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 500px;
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: var(--color-2);
+}
+
+.inputSet {
+  position: relative;
+  width: 100%;
+  font-weight: 100;
+  font-size: 8pt;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-3);
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.detalhe {
+  display: none;
+  background: var(--color-4);
+  width: 5px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.inputSet label {
+  opacity: 0.6;
+  margin-bottom: 0.2rem;
+}
+
+.return {
+  width: 500px;
+  height: max-content;
+}
+
+.notification {
+  padding: 1rem;
+  margin: 1rem 0;
+  box-shadow: 0 5px 10px var(--color-1);
+}

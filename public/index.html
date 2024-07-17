@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Websocket Server</title>
+    <link href="style.css" rel="stylesheet" />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon.ico" />
+    <script
+      src="https://cdn.socket.io/4.7.2/socket.io.min.js"
+      integrity="sha384-mZLF4UVrpi/QTWPA7BjNPEnkIfRFn4ZEO3Qt/HFklTJBj/gBOV8G3HcKn4NfQblz"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="titleApp">
+        <h1 style="text-transform: uppercase">Notifications</h1>
+        <p>Websocket server test application.</p>
+      </div>
+      <div class="modal">
+        <form id="formNotifications" class="form" onsubmit="submitForm(event)">
+          <label for="title" class="inputSet">
+            <div class="detalhe"></div>
+            <label for="title">Título</label>
+            <input id="title" type="text" onfocus="focusInput(event)" />
+          </label>
+          <label for="description" class="inputSet">
+            <div class="detalhe"></div>
+            <label for="description">Descrição</label>
+            <textarea
+              id="description"
+              style="resize: none"
+              onfocus="focusInput(event)"
+            ></textarea>
+          </label>
+          <button type="submit">Enviar</button>
+        </form>
+      </div>
+      <div class="modal">
+        <div class="return" id="return"></div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      var socket = io(`${window.location}`);
+
+      function focusInput(event) {
+        var obj1 = document.querySelectorAll(".detalhe");
+        if (event.target.id === "title") {
+          obj1[1].style.display = "none";
+          obj1[0].style.display = "block";
+        } else {
+          obj1[0].style.display = "none";
+          obj1[1].style.display = "block";
+        }
+      }
+      function submitForm(event) {
+        event.preventDefault();
+
+        var title = document.getElementById("title");
+        var description = document.getElementById("description");
+
+        if (title.value.length && description.value.length) {
+          var notificationObject = {
+            title: title.value,
+            description: description.value,
+          };
+
+          renderNotification(notificationObject);
+
+          socket.emit("sendNotification", notificationObject);
+
+          title.value = "";
+          description.value = "";
+        }
+      }
+      function renderNotification(data) {
+        var returns = document.getElementById("return");
+        var newDiv = document.createElement("div"),
+          title = document.createElement("h3"),
+          description = document.createElement("textarea");
+
+        newDiv.classList.add("notification");
+        title.innerHTML= data.title
+        title.style.userSelect = "none"
+        description.innerHTML= data.description
+        description.style.resize = "none"
+        description.style.userSelect = "none"
+        description.disabled = true
+
+          newDiv.appendChild(title);
+          newDiv.appendChild(description);
+          returns.appendChild(newDiv);
+      }
+
+      socket.on('previousNotification', (notifications)=>{
+        let notification = []
+        for(notification of notifications) {
+          renderNotification(notification);
+        }
+      });
+
+      socket.on('receivedNotification', (notifications)=>{
+        renderNotification(notifications)
+      });
+    </script>
+  </body>
+</html>
