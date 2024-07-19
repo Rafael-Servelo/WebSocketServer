@@ -1,21 +1,18 @@
 const express = require("express");
 const path = require("path");
-
+const cors = require('cors')
 const app = express();
 const http = require("http");
 const { Server } = require("socket.io");
 const server = http.createServer(app);
-const io = new Server(server, {
-  cors: {
-    origin: "*",
-  },
-});
+const io = new Server(server);
 const os = require("os");
 const clc = require("cli-color");
 
 const networkinfo = os.networkInterfaces();
 const ipv4 = networkinfo.en1[1].address;
 
+app.use(cors())
 app.use(express.static(path.join(__dirname, "public")));
 app.set("views", path.join(__dirname, "public"));
 app.engine("html", require("ejs").renderFile);
