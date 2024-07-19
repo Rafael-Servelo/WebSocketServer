@@ -75,7 +75,7 @@ const port = process.env.PORT || 3001
 server.listen(port, () => {
   console.log(
     "Starting connection to WebSocket Server in: \n\n" +
-      clc.bold.green("→  ") + clc.white.bold("Local: ") + clc.cyanBright("http://localhost:"+port+"\n") +
-      clc.bold.green("→  ") + clc.white.bold("Network: ") + clc.cyanBright("http://" + ipv4 + ":"+  port + "\n")
+      clc.bold.green("→  ") + clc.white.bold("Local: ") + clc.cyanBright(`http://localhost:${port}\n`) +
+      clc.bold.green("→  ") + clc.white.bold("Network: ") + clc.cyanBright(`http://${ipv4}:${port}\n`)
   );
 });
